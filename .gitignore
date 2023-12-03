@@ -1,0 +1,6 @@
+dev/
+*.xml
+*.yaml
+*.csv
+*.txt
+*.exe
