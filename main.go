@@ -35,10 +35,6 @@ func main() {
    
    successfulRequests := 0
    errorCount  := 0
-
-   if err != nil {
-      panic(err)
-   }
    
 
    
@@ -106,7 +102,7 @@ func main() {
 
    csvfileWriter, csvwriter_err := os.Create("Output.csv")
    if csvwriter_err != nil{
-      panic(err)
+      panic(csvwriter_err)
    }
    defer csvfileWriter.Close()
 
