@@ -31,11 +31,7 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
    defer wg.Done()
 
    retValue := make(map[string]map[int]HttpResult)
-   
-   // log.Printf("Testing for %s %s\n", opt.Method, opt.URL)
-
    var errorStr = "" 
-   //fmt.Println(opt.URL,opt.Body)
    req, _ := http.NewRequest(opt.Method,opt.URL,bytes.NewBuffer([]byte(opt.Body)))
 
    req.Header["User-Agent"] = []string{opt.DefaultUserAgent}
@@ -67,12 +63,10 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
    if req_err != nil {
       errorStr = "timedOut"
       if cmdOptions.IsVerbose{log.Printf("[Failed] %s %s - Request Failed. Status Code: %d, Size: %d bytes\n", opt.Method, opt.URL, resp.StatusCode,0)}
-      //log.Printf("Goroutine for %s %s finished\n", opt.Method, opt.URL)
       retValue[uid] = map[int]HttpResult{
             idx: {
                 URL:         opt.URL,
                 Method:      opt.Method,
-                //Header:      nil,
                 StatusCode:  errorStr,
                 Size:        "\"\"",
                 Body:        "",
@@ -89,17 +83,14 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
    }
 
    body,body_err := ioutil.ReadAll(resp.Body)
-   //fmt.Println(string(body))
    if body_err != nil {
       body = []byte("Error on response")
    }
    if cmdOptions.IsVerbose{log.Printf("[Success] %s %s - Request completed. Status Code: %d, Size: %d bytes\n", opt.Method, opt.URL, resp.StatusCode, len(body))}
-   //log.Printf("Goroutine for %s %s finished\n", opt.Method, opt.URL)
    retValue[uid] = map[int]HttpResult{
         idx: {
             URL:         opt.URL,
             Method:      opt.Method,
-            //Header:      resp.Header,
             StatusCode:  strconv.Itoa(resp.StatusCode),
             Size:        strconv.Itoa(len(body)),
             Body:        string(body),
@@ -110,7 +101,6 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
             BurpItem:    burpItm,
         },
     }
-
    c <- retValue
 
    return
@@ -120,7 +110,6 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
 func MakeRequestMultiAuth(postData string,k burp.Item,yamlAuthheaders []map[string]string,globalHeaders []map[string]string,HTTPHeader HTTPHeader,wg *sync.WaitGroup, resQueue chan map[string]map[int]HttpResult,cmdOpts *cmdOptions.CmdOpt,pbar *pb.ProgressBar) {
 
    id := uuid.New()
-   //log.Printf("Testing for %s %s\n", k.Method, k.Url)
    for i := 0; i<len(yamlAuthheaders); i++ {
       header := initHeader(globalHeaders,yamlAuthheaders[i])
       if HTTPHeader.Name != "" && HTTPHeader.Value != ""{

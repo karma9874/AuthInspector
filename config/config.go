@@ -38,9 +38,7 @@ type yamlConfig struct {
 }
 
 func createExampleYAML() error {
-
    _, err := os.Stat("init.yaml")
-
    if os.IsNotExist(err) {
       err := ioutil.WriteFile("init.yaml", []byte(defaultYAMLContent), 0644)
       if err != nil {
@@ -68,7 +66,6 @@ func ReadConfigYaml() (yamlConfig){
    }
 
    config := yamlConfig{}
-
    err = yaml.Unmarshal(yamlFile,&config)
 
    if err != nil {

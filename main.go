@@ -31,13 +31,10 @@ func main() {
    flag.IntVar(&cmdOptions.Threads, "threads", 10, "Number of concurrent threads")
    flag.Parse()
    
-   
-   
    successfulRequests := 0
    errorCount  := 0
-   
+   startTime := time.Now()
 
-   
    yamlObj := config.ReadConfigYaml()
    xmlData := burp.ReadBurpXML(yamlObj.SourceFileName)
 
@@ -45,17 +42,13 @@ func main() {
       http.GetAllMimeTypes(xmlData.Item)
    }
 
-
-   startTime := time.Now()
-
    totalRequests := http.GetAllReqCount(xmlData.Item,yamlObj.FilterMimeTypes)*len(yamlObj.AuthHeaders)
 
    if !cmdOptions.IsVerbose{
       progressBar = pb.StartNew(totalRequests)   
    }else{
       progressBar = nil
-   }
-   
+   }   
 
    if cmdOptions.IsVerbose{
       log.Println("Configurations:")
@@ -109,7 +102,6 @@ func main() {
    fmt.Fprintln(csvfileWriter,strings.Join(csv.PopulateCSVHeaders(len(yamlObj.AuthHeaders),cmdOptions),","))
    csv.DoCSV(csvfileWriter,finalResult,len(yamlObj.AuthHeaders),cmdOptions)
    fmt.Println("\nAuthInspector completed successfully.")
-   
    fmt.Println("Output stored in Output.csv")
    elapsedTime := time.Since(startTime)
    fmt.Printf("Summary: Total Requests: %d, Successful Requests: %d, Errors: %d", totalRequests, successfulRequests, errorCount)
