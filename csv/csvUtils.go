@@ -84,7 +84,7 @@ func DoCSV(csvfileWriter *os.File,res map[string]map[int]http.HttpResult,authHea
          
          fmt.Fprint(csvfileWriter,",",strings.Join([]string{value[i].StatusCode,value[i].Size},","))
          if cmdOptions.IsResponseBody{
-            printFormattedString(csvfileWriter,value[0].Body)
+            printFormattedString(csvfileWriter,value[i].Body)
          }
          
          if strconv.Itoa(len(burpResponse)) == value[i].Size{
