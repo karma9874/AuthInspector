@@ -13,9 +13,10 @@ import (
 func GetPostDataAndContentType(request string) (string,HTTPHeader){
    var HTTPHeaderStruct HTTPHeader
    rawDecodedText,_ := base64.StdEncoding.DecodeString(request)
-   token := strings.Split(string(rawDecodedText),"\r")
+   token := strings.Split(string(rawDecodedText),"\r\n\r\n")
 
-   for _,i := range(token){
+   header_token := strings.Split(token[0],"\r\n")
+   for _,i := range(header_token){
       token_seg := strings.Split(i,":")
       if len(token_seg) > 1{
          if strings.TrimSpace(token_seg[0]) == "Content-Type"{
@@ -24,11 +25,12 @@ func GetPostDataAndContentType(request string) (string,HTTPHeader){
          } 
       }
    }
-   if token[len(token)-2] == "\n" && token[len(token)-1] != "\n" {
-      return token[len(token)-1],HTTPHeaderStruct
-   }else{
-      return "",HTTPHeaderStruct
-   }
+   // if token[len(token)-2] == "\n" && token[len(token)-1] != "\n" {
+   //    fmt.Println(token[len(token)-1])
+   //    return token[1],HTTPHeaderStruct
+   // }else{
+      return token[1],HTTPHeaderStruct
+   // }
 }
 
 func GetBurpResponseBody(Response string) string{

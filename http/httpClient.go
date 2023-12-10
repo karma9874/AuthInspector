@@ -35,7 +35,8 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
    // log.Printf("Testing for %s %s\n", opt.Method, opt.URL)
 
    var errorStr = "" 
-   req, err := http.NewRequest(opt.Method,opt.URL,bytes.NewBuffer([]byte(opt.Body)))
+   //fmt.Println(opt.URL,opt.Body)
+   req, _ := http.NewRequest(opt.Method,opt.URL,bytes.NewBuffer([]byte(opt.Body)))
 
    req.Header["User-Agent"] = []string{opt.DefaultUserAgent}
 
@@ -57,13 +58,13 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
    tlsConfig := tls.Config{InsecureSkipVerify: true}
 
    client := &http.Client{Transport: &http.Transport{Proxy: proxyFunc,TLSClientConfig: &tlsConfig},Timeout: cmdOptions.TimeOut}
-   resp, err := client.Do(req)
+   resp, req_err := client.Do(req)
    
    if !cmdOptions.IsVerbose{
       pbar.Increment()   
    }
 
-   if err != nil {
+   if req_err != nil {
       errorStr = "timedOut"
       if cmdOptions.IsVerbose{log.Printf("[Failed] %s %s - Request Failed. Status Code: %d, Size: %d bytes\n", opt.Method, opt.URL, resp.StatusCode,0)}
       //log.Printf("Goroutine for %s %s finished\n", opt.Method, opt.URL)
@@ -87,8 +88,9 @@ func MakeRequest(opt HTTPClient,c chan map[string]map[int]HttpResult,wg *sync.Wa
       return
    }
 
-   body,err := ioutil.ReadAll(resp.Body)
-   if err != nil {
+   body,body_err := ioutil.ReadAll(resp.Body)
+   //fmt.Println(string(body))
+   if body_err != nil {
       body = []byte("Error on response")
    }
    if cmdOptions.IsVerbose{log.Printf("[Success] %s %s - Request completed. Status Code: %d, Size: %d bytes\n", opt.Method, opt.URL, resp.StatusCode, len(body))}
