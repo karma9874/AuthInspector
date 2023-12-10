@@ -23,16 +23,16 @@ func PopulateCSVHeaders(authHeadersLen int,cmdOpt *cmdOptions.CmdOpt) []string{
    for i:=0 ; i < authHeadersLen; i++{
 
       if i == authHeadersLen -1{
-         CSVHeader = append(CSVHeader,"Un Auth Status Code")
-         CSVHeader = append(CSVHeader,"Un Auth Content Length")
+         CSVHeader = append(CSVHeader,"UnAuth Status Code")
+         CSVHeader = append(CSVHeader,"UnAuth Content Length")
          if cmdOpt.IsResponseBody{	
-            CSVHeader = append(CSVHeader,"Un Auth Response Body")  
+            CSVHeader = append(CSVHeader,"UnAuth Response Body")  
          }         
       }else{
          CSVHeader = append(CSVHeader,"Auth"+strconv.Itoa(i+1)+" Status Code")
          CSVHeader = append(CSVHeader,"Auth"+strconv.Itoa(i+1)+" Content Length")
          if cmdOpt.IsResponseBody{
-            CSVHeader = append(CSVHeader,"Auth "+strconv.Itoa(i+1)+" Response Body")  
+            CSVHeader = append(CSVHeader,"Auth"+strconv.Itoa(i+1)+" Response Body")  
          }
       }
    }

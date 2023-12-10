@@ -22,24 +22,24 @@ func main() {
    cmdOptions := new(cmdOptions.CmdOpt)
    var progressBar *pb.ProgressBar
    
-   flag.StringVar(&cmdOptions.IsProxy, "p", "", "Use proxy")
+   flag.StringVar(&cmdOptions.IsProxy, "proxy", "", "Use proxy")
    flag.BoolVar(&cmdOptions.IsResponseBody, "respBody",false, "Get response body")
    flag.BoolVar(&cmdOptions.IsRequestBody, "reqBody",false, "Get request body")
    flag.BoolVar(&cmdOptions.MimeType, "listmime",false, "List all mime type from burp file")
    flag.BoolVar(&cmdOptions.IsVerbose, "verbose",false, "Enable verbose output")
    flag.DurationVar(&cmdOptions.TimeOut, "timeout",5*time.Second, "Set timeout for request in sec")
-   flag.IntVar(&cmdOptions.Threads, "thread", 10, "Number of concurrent threads")
+   flag.IntVar(&cmdOptions.Threads, "threads", 10, "Number of concurrent threads")
    flag.Parse()
    
    
-   csvfileWriter, err := os.Create("Output.csv")
+   
    successfulRequests := 0
    errorCount  := 0
 
    if err != nil {
       panic(err)
    }
-   defer csvfileWriter.Close()
+   
 
    
    yamlObj := config.ReadConfigYaml()
@@ -103,6 +103,13 @@ func main() {
         }
    }
    if !cmdOptions.IsVerbose{progressBar.Finish()}
+
+   csvfileWriter, csvwriter_err := os.Create("Output.csv")
+   if csvwriter_err != nil{
+      panic(err)
+   }
+   defer csvfileWriter.Close()
+
    fmt.Fprintln(csvfileWriter,strings.Join(csv.PopulateCSVHeaders(len(yamlObj.AuthHeaders),cmdOptions),","))
    csv.DoCSV(csvfileWriter,finalResult,len(yamlObj.AuthHeaders),cmdOptions)
    fmt.Println("\nAuthInspector completed successfully.")
