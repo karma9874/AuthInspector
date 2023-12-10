@@ -32,7 +32,7 @@ auth:
   - header_key: header_value
   - header_key: header_value  # Do not remove this header (use to check unauthenticated requests)
 
-# Mime types(case sensitive, for more details list mime type check -lm mode). The tool will focus on checking authentication issues only on specified mime types.
+# Mime types(case sensitive, for more details list mime type check -listmime mode). The tool will focus on checking authentication issues only on specified mime types.
 filterMimeTypes:
   - JSON
   - XML
