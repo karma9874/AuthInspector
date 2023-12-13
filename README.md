@@ -1,12 +1,22 @@
 # AuthInspector
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) 
+[![Apache-2.0 License](https://img.shields.io/badge/license-Apache2.0-blue.svg)](http://www.apache.org/licenses/) 
 [![Twitter Follow](https://img.shields.io/twitter/follow/karma9874?label=Follow&style=social)](https://twitter.com/karma9874)
 [![GitHub followers](https://img.shields.io/github/followers/karma9874?label=Follow&style=social)](https://github.com/karma9874)
 
 AuthInspector is an advanced authorization and authentication testing tool designed to automate the assessment of authorization checks using multiple authentication headers. Seamlessly integrated with Burp Suite-generated requests file.
 
+# How it works
+<h3 align="center">
+  <img src="static/flow.png" width="700px"></a>
+</h3>
+
 # Installation
+
+## Easy Installationss
+You can download the prebuilt binary from the [releases](https://github.com/karma9874/AuthInspector/releases) page.
+
+## Go User 
 `go install github.com/karma9874/AuthInspector@latest`
 
 # Usage
@@ -20,6 +30,9 @@ AuthInspector provides the following commands for customization:
 -listmime 	Lists the available mimetypes from the burp exported file
 -verbose	Verbose output
 ```
+
+## Running AuthInspector
+`AuthInspector -proxy http://proxy.example.com -respBody -reqBody -time 5s -threads 20`
 
 ## Config Template
 init.yaml
@@ -43,6 +56,5 @@ headers:
   - API-KEY: some_key
 ```
 
-## Example:
-`authinspector -proxy http://proxy.example.com -respBody -reqBody -time 5s -threads 20`
+
 

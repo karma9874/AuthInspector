@@ -18,6 +18,8 @@ import (
 
 func main() {
 
+   cmdOptions.Banner()
+
    wg := &sync.WaitGroup{}
    cmdOptions := new(cmdOptions.CmdOpt)
    var progressBar *pb.ProgressBar
