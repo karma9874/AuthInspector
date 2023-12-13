@@ -6,18 +6,21 @@
 
 AuthInspector is an advanced authorization and authentication testing tool designed to automate the assessment of authorization checks using multiple authentication headers. Seamlessly integrated with Burp Suite-generated requests file.
 
-# How it works
+# Work flow
 <h3 align="center">
   <img src="static/flow.png" width="700px"></a>
 </h3>
 
 # Installation
 
-## Easy Installationss
+### Easy Installations
 You can download the prebuilt binary from the [releases](https://github.com/karma9874/AuthInspector/releases) page.
 
-## Go User 
+### go install 
 `go install github.com/karma9874/AuthInspector@latest`
+
+### go build
+`go get && go build`
 
 # Usage
 AuthInspector provides the following commands for customization:
