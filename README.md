@@ -25,10 +25,10 @@ AuthInspector is a Golang tool designed for hassle-free authorization and authen
 1. Begin by capturing web requests using the high-level account.
 2. Once your website browsing is complete, export the requests by navigating to `Target -> Site map -> selecting the URL -> Right Click and Save Selected Item`.
 3. Create an init.yaml file with the following configurations:
-    * `source:` Specify the name of the exported file from the previous step (Compulsory).
-    * `auth:` Define the header responsible for authentication (e.g., Cookie, Authorization header, custom) (Compulsory).
-    * `filterMimeType:` Include requests containing the specified MIME type (Compulsory).
-    * `headers:` Optionally provide global headers, influencing requests containing this header (Optional).
+    * `source:` Specify the name of the exported file from the previous step.
+    * `auth:` Define the header responsible for authentication (e.g., Cookie, Authorization header, custom).
+    * `filterMimeType:` Include requests containing the specified MIME type.
+    * `headers:` Optionally provide global headers, influencing requests containing this header.
 
 AuthInspector provides the following commands for customization:
 ```
