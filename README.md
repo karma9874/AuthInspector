@@ -44,7 +44,7 @@ AuthInspector provides the following commands for customization:
 **Running AuthInspector**
 
 ``` 
-AuthInspector -proxy http://proxy.example.com -respBody -reqBody -time 5s -threads 20
+AuthInspector.exe -respBody -reqBody
 ```
 
 **Config Template**
