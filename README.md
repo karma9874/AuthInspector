@@ -8,7 +8,7 @@ AuthInspector is a Golang tool designed for hassle-free authorization and authen
 
 # Work flow
 <h3 align="center">
-  <img src="final.png" alt="nuclei-flow" width="700px"></a>
+  <img src="static/flow.png" width="700px"></a>
 </h3>
 
 
