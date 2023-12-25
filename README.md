@@ -31,7 +31,7 @@ AuthInspector is a Golang tool designed for hassle-free authorization and authen
     * `headers:` Optionally provide global headers, influencing requests containing this header (Optional).
 
 AuthInspector provides the following commands for customization:
-```bash
+```
 -proxy    Set up a proxy for testing.
 -respBody Include response body in the output
 -reqBody  Include request body in the output.
@@ -43,7 +43,7 @@ AuthInspector provides the following commands for customization:
 
 **Running AuthInspector**
 
-```bash 
+``` 
 AuthInspector -proxy http://proxy.example.com -respBody -reqBody -time 5s -threads 20
 ```
 
